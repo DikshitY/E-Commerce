@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
-import { setToken } from '../store';
+import { setToken, setUser } from '../store';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -26,14 +26,16 @@ const LoginPage = () => {
       const data = res.data
       if (data.user && data.token) {
         toast.success(data.message);
-        localStorage.setItem('auth', JSON.stringify({user: data.user, token: data.token}))
-        dispatch(setToken(data))
+        localStorage.setItem('token', JSON.stringify(data.token))
+        dispatch(setUser(data.user))
+        dispatch(setToken(data.token))
         navigate(location.state || '/');
       } else {
         toast.error("Unable to login.");
       }
     } catch (err) {
-      toast.error('Something went wrong. Please try again.');
+      console.log(err);
+      toast.error('Email or password is incorrect.');
     }
   };
 

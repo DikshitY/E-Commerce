@@ -1,28 +1,34 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-const ForgotPasswordPage = () => {
-  const [email, setEmail] = useState('');
+const ResetPassword = () => {
+  const navigate = useNavigate();
+  const param = useParams();
+  const { token } = param;
+
+  const [password, setPassword] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const headers = { Authorization: `Bearer ${token}` };
       const res = await axios.post(
-        `http://localhost:5000/api/v1/users/forgetpassword`,
+        `http://localhost:5000/api/v1/users/resetpassword`,
         {
-          email,
-        }
+          password,
+        },
+        { headers }
       );
       if (res) {
-        toast.success(
-          'Password reset link has been sent to your registered e-mail.'
-        );
-        setEmail('')
+        toast.success('Password updated.');
+        navigate('/login');
+        console.log('asda');
       }
     } catch (err) {
-      toast.error('User does not exist.');
+        console.log(err);
+      toast.error('Unauthorized access.');
     }
   };
 
@@ -33,24 +39,20 @@ const ForgotPasswordPage = () => {
         <form onSubmit={handleSubmit}>
           <div>
             <label>
-              <p className="font-semibold mb-4">E-mail</p>
+              <p className="font-semibold mb-4">Enter new password</p>
               <input
-                type="email"
-                placeholder="Enter your e-mail"
+                type="password"
+                placeholder="Set password"
                 className="w-full focus:outline-none border-b-2 border-black mb-4"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </label>
           </div>
-          <Link to="/login" className="text-blue-600 text-sm">
-            Login
-          </Link>{' '}
-          ?
           <div className="flex gap-8 mt-6">
             <button className="bg-black text-white px-6 py-1 rounded-3xl">
-              Send
+              Update Password
             </button>
           </div>
         </form>
@@ -59,4 +61,4 @@ const ForgotPasswordPage = () => {
   );
 };
 
-export default ForgotPasswordPage;
+export default ResetPassword;

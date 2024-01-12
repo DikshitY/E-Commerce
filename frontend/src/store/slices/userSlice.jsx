@@ -7,12 +7,14 @@ const userSlice = createSlice({
         token: ""
     },
     reducers:{
+        setUser(state,action){
+            state.user = action.payload
+        },
         setToken(state, action){
-            state.user = action.payload.user
-            state.token = action.payload.token
+            state.token = action.payload
         }
     }
 })
 
 export const userReducer = userSlice.reducer
-export const {setToken} = userSlice.actions
+export const {setToken, setUser} = userSlice.actions

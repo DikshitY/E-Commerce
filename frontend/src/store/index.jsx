@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { userReducer, setToken } from "./slices/userSlice";
+import { userReducer, setToken, setUser} from "./slices/userSlice";
 
 const store = configureStore({
     reducer: {
@@ -7,4 +7,4 @@ const store = configureStore({
     }
 })
 
-export {store, setToken}
+export {store, setToken, setUser}
