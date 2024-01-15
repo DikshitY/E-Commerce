@@ -57,14 +57,6 @@ exports.logoutUser = async (req, res) => {
   }
 }
 
-exports.test = async (req, res, next) => {
-  try {
-    res.send('User is admin');
-  } catch (err) {
-    res.status(500).send(err);
-  }
-};
-
 exports.forgetpassword = async (req, res) => {
   try {
     const { email } = req.body;

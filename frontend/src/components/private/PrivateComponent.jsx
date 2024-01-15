@@ -5,20 +5,28 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 const PrivateComponent = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const auth = JSON.parse(localStorage.getItem('auth'));
-  const token = auth?.token;
+  const token = JSON.parse(localStorage.getItem('token'));
+  const user = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
     const handleNavigation = () => {
+      if ( user.role) {
+       return navigate('/dashboard/admin');
+      } else {
+       return navigate('/dashboard/user');
+      }
+    };
+    const initialCheck = () => {
       toast.error('Please Login.');
       navigate('/login', {
-        state: location.pathname
+        state: location.pathname,
       });
     };
     if (!token) {
-      handleNavigation()
+      return initialCheck();
     }
-  }, [token, navigate, location]);
+    return handleNavigation()
+  }, []);
 
   return token ? <Outlet /> : null;
 };

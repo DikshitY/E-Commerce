@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -8,9 +8,17 @@ import { setToken, setUser } from '../store';
 const SignupPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if(token){
+      navigate('/')
+    }
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +35,7 @@ const SignupPage = () => {
       if (data.user && data.token) {
         toast.success(data.message);
         localStorage.setItem('token', JSON.stringify(data.token) )
+        localStorage.setItem('user', JSON.stringify(data.user) )
         dispatch(setUser(data.user))
         dispatch(setToken(data.token))
         navigate('/');

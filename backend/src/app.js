@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const app = express();
 const AppError = require('./utils/AppError');
 const userRouter = require('./routes/user.routes')
+const productRouter = require('./routes/product.routes')
 
 app.use(cors());
 app.use(helmet());
@@ -13,7 +14,9 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.get('/', (req,res) => {
   res.send('Welcome to the E-Commerece API.')
 })
+
 app.use('/api/v1/users', userRouter)
+app.use('/api/v1/products', productRouter)
 
 
 app.all('*', (req, res, next) => {

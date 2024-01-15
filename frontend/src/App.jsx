@@ -15,6 +15,16 @@ import PrivateComponent from './components/private/PrivateComponent';
 import Dashboard from './pages/user/Dashboard';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPassword from './pages/ResetPassword';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminProfile from './pages/admin/AdminProfile';
+import AddProduct from './pages/admin/AddProduct';
+import ShowUsers  from './pages/admin/ShowUsers';
+import UpdateAdminProfile from './pages/admin/UpdateAdminProfile';
+import UpdateProduct from './pages/admin/UpdateProduct';
+import ShowProducts from './pages/admin/ShowProducts';
+import UserProfile from './pages/user/UserProfile';
+import UpdateUserProfile from './pages/user/UpdateUserProfile';
+import Orders from './pages/user/Orders'
 
 const App = () => {
   const disptach = useDispatch();
@@ -39,7 +49,19 @@ const App = () => {
         <Route element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="dashboard" element={<PrivateComponent />}>
-            <Route index element={<Dashboard />} />
+            <Route path='user' element={<Dashboard />}>
+              <Route index element={<UserProfile/>}/>
+              <Route path='update-user-profile' element={<UpdateUserProfile/>}/>
+              <Route path='orders' element={<Orders/>}/>
+            </Route>
+            <Route path='admin' element={<AdminDashboard/>}>
+                <Route index element={<AdminProfile/>} />
+                <Route path='update-admin-profile' element={<UpdateAdminProfile/>} />
+                <Route path='add-product' element={<AddProduct/>}/>
+                <Route path='update-product' element={<UpdateProduct/>}/>
+                <Route path='show-products' element={<ShowProducts/>}/>
+                <Route path='show-users' element={<ShowUsers/>}/>
+            </Route>
           </Route>
           <Route path="signup" element={<SignupPage />} />
           <Route path="login" element={<LoginPage />} />

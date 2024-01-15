@@ -14,7 +14,7 @@ const ResetPassword = () => {
     e.preventDefault();
     try {
       const headers = { Authorization: `Bearer ${token}` };
-      const res = await axios.post(
+      const res = await axios.patch(
         `http://localhost:5000/api/v1/users/resetpassword`,
         {
           password,

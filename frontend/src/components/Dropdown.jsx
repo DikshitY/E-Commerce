@@ -3,7 +3,7 @@ import { FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Dropdown = ({ data }) => {
   const navigate = useNavigate();
