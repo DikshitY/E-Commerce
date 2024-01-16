@@ -1,22 +1,31 @@
 const Product = require('../models/productModel');
 const slugify = require('slugify');
-const sharp = require('sharp');
+const cloudinary = require('../utils/cloudinary');
 
 exports.addProduct = async (req, res) => {
   try {
-    const buffer = await sharp(req.file?.buffer).png().toBuffer();
-    const product = await Product.create({
-      ...req.body,
-      slug: slugify(req.body.name),
-      image: buffer,
-    });
+    const file = req.files.image;
 
-    res.status(201).json({
-      status: 'success',
-      message: 'Product added successfully.',
-      product,
+    cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
+      if (err) {
+        return res.status(500).json({
+          error: err.message,
+        });
+      }
+
+      const product = await Product.create({
+        ...req.body,
+        slug: slugify(req.body.name),
+        imageUrl: result.url,
+      });
+      res.status(201).json({
+        status: 'success',
+        message: 'Product added successfully.',
+        product,
+      });
     });
   } catch (err) {
+    console.log(err);
     res.status(400).json({
       status: 'fail',
       message: 'Unable to add product.',
@@ -27,37 +36,19 @@ exports.addProduct = async (req, res) => {
 
 exports.getProducts = async (req, res) => {
   try {
-    const products = await Product.find().sort({ createdAt: -1 });
+    const products = await Product.find().sort({ createdAt: -1 }).lean();
 
-    if (!products) {
+    if (!products || products.length === 0) {
       return res.status(400).json({
         status: 'fail',
-        message: 'Unable to get products. Bad request.',
+        message: 'No products found.',
       });
     }
 
-    const formattedProducts = products.map((product) => {
-      return {
-        _id: product._id,
-        name: product.name,
-        price: product.price,
-        category: product.category,
-        brand: product.brand,
-        rating: product.rating,
-        reviews: product.reviews,
-        description: product.description,
-        quantity: product.quantity,
-        offer: product.offer,
-        currency: product.currency,
-        slug: product.slug,
-        imageUrl: `http://localhost:5000/api/v1/products/getProductImage/${product._id}`,
-      };
-    });
-
     res.json({
       status: 'success',
-      results: formattedProducts.length,
-      products: formattedProducts,
+      results: products.length,
+      products,
     });
   } catch (err) {
     console.log(err);
@@ -75,85 +66,128 @@ exports.getProduct = async (req, res) => {
     if (!product) {
       return res.status(404).json({
         status: 'fail',
-        message: 'Product does not exists.',
+        message: 'Product does not exist.',
       });
     }
 
-    const formattedProduct = {
-      _id: product._id,
-      name: product.name,
-      price: product.price,
-      category: product.category,
-      brand: product.brand,
-      rating: product.rating,
-      reviews: product.reviews,
-      description: product.description,
-      quantity: product.quantity,
-      offer: product.offer,
-      currency: product.currency,
-      slug: product.slug,
-      imageUrl: `http://localhost:5000/api/v1/products/getProductImage/${product._id}`,
-    };
-
     res.send({
       status: 'success',
-      product: formattedProduct,
+      product,
     });
   } catch (err) {
     res.status(500).json({
       status: 'error',
       message: 'Unable to get the product.',
-      error: err,
+      error: err.message,
     });
   }
 };
 
+// exports.updateProduct = async (req, res) => {
+//   const updates = Object.keys(req.body);
+//   const allowedUpdates = [
+//     'name',
+//     'category',
+//     'price',
+//     'description',
+//     'price',
+//     'quantity',
+//     'image',
+//     'currency',
+//     'offer',
+//     'imageUrl'
+//   ];
+
+//   const isValidOperation = updates.every((update) =>
+//     allowedUpdates.includes(update)
+//   );
+//   if (!isValidOperation) {
+//     return res.status(400).json({
+//       status: 'fail',
+//       message: 'Please update correct field.',
+//     });
+//   }
+
+//   try {
+//     const product = await Product.findById(req.params.id);
+//     if (!product) {
+//       return res.status(404).json({
+//         status: 'fail',
+//         message: 'Product does not exists.',
+//       });
+//     }
+//     updates.forEach((update) => (product[update] = req.body[update]));
+//     await product.save();
+
+//     res.json({
+//       status: 'success',
+//       message: 'Product updated successfully.',
+//       product,
+//     });
+//   } catch (err) {
+//     res.status(400).json({
+//       status: 'fail',
+//       message: 'Unable to update product.',
+//       error: err,
+//     });
+//   }
+// };
+
 exports.updateProduct = async (req, res) => {
-  const updates = Object.keys(req.body);
-  const allowedUpdates = [
-    'name',
-    'category',
-    'price',
-    'description',
-    'price',
-    'quantity',
-    'image',
-    'rating',
-    'reviews',
-    'offer',
-  ];
-
-  const isValidOperation = updates.every((update) =>
-    allowedUpdates.includes(update)
-  );
-  if (!isValidOperation) {
-    return res.status(400).json({
-      status: 'fail',
-      message: 'Please update correct field.',
-    });
-  }
-
   try {
-    const product = await Product.findById(req.params.id);
-    if (!product) {
-      return res.status(404).json({
-        status: 'fail',
-        message: 'Product does not exists.',
+    if (req.files?.image) {
+      const file = req.files.image;
+
+      cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({
+            error: err.message,
+          });
+        }
+        const product = await Product.findByIdAndUpdate(req.params.id, {
+          ...req.body,
+          slug: slugify(req.body.name),
+          imageUrl: result.url,
+        });
+        if (!product) {
+          return res.status(404).json({
+            status: 'fail',
+            message: 'Product does not exists.',
+          });
+        }
+
+        res.json({
+          status: 'success',
+          message: 'Product updated successfully.',
+          product,
+        });
+      });
+    } else {
+      const product = await Product.findByIdAndUpdate(req.params.id, {
+        ...req.body,
+        slug: slugify(req.body.name),
+      });
+
+      if (!product) {
+        return res.status(404).json({
+          status: 'fail',
+          message: 'Product does not exists.',
+        });
+      }
+
+      res.json({
+        status: 'success',
+        message: 'Product updated successfully.',
+        product,
       });
     }
-    updates.forEach((update) => (product[update] = req.body[update]));
-    await product.save();
-
-    res.json({
-      status: 'success',
-      message: 'Product updated successfully.',
-      product,
-    });
   } catch (err) {
+    console.log(err);
     res.status(400).json({
       status: 'fail',
       message: 'Unable to update product.',
-      error: err,
+      error: err.message,
     });
   }
 };
@@ -167,34 +201,15 @@ exports.deleteProduct = async (req, res) => {
         message: 'Product does not exists.',
       });
     }
-    res.send();
+    res.json({
+      status: 'success',
+      message: 'Product deleted successfully.',
+    });
   } catch (err) {
     res.status(400).json({
       status: 'fail',
       message: 'Unable to delete product.',
       error: err,
-    });
-  }
-};
-
-exports.getProductImage = async (req, res) => {
-  try {
-    const product = await Product.findById(req.params.id);
-
-    if (!product || !product.image) {
-      return res.status(404).json({
-        status: 'fail',
-        message: 'Product image does not exist.',
-      });
-    }
-
-    res.set('Content-Type', 'image/png');
-    res.send(product.image);
-  } catch (err) {
-    res.status(500).json({
-      status: 'error',
-      message: 'Unable to get the product iamge.',
-      error: err.message,
     });
   }
 };

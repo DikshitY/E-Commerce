@@ -37,7 +37,7 @@ const Sidebar = () => {
     <div className="flex gap-4 items-center">
       <NavLink to="products">Products</NavLink>
       <NavLink to="category">Category</NavLink>
-      <div className="group relative cursor-pointer z-10">
+      <div className="group relative cursor-pointer">
         <FaUser className="text-xl" />
         <ul className="absolute -left-4 top-6 py-4 px-1 rounded-xl bg-slate-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col gap-2">
           {token ? (

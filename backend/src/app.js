@@ -5,11 +5,15 @@ const app = express();
 const AppError = require('./utils/AppError');
 const userRouter = require('./routes/user.routes')
 const productRouter = require('./routes/product.routes')
+const fileUpload = require('express-fileupload')
 
 app.use(cors());
 app.use(helmet());
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
+app.use(fileUpload({
+  useTempFiles: true
+}))
 
 app.get('/', (req,res) => {
   res.send('Welcome to the E-Commerece API.')

@@ -48,12 +48,9 @@ const productSchema = new mongoose.Schema(
       type: String,
       default: 'Indian rupee',
     },
-    image: {
-      type: Buffer,
-      required: true,
-    },
     imageUrl: {
-        type: String
+        type: String,
+        required: true
     }
   },
   { timestamps: true }

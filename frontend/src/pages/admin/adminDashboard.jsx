@@ -13,10 +13,10 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="pt-20 pb-24 px-4 flex gap-8 h-screen">
-      <div className="border-2 rounded-xl h-full  p-4 w-48 shadow-2xl">
+    <div className="pt-20 pb-24 px-4 flex gap-8 ">
+      <div className="border-2 rounded-xl p-4 w-48 shadow-2xl h-full">
         <h1 className="text-lg font-medium">Admin Panel</h1>
-        <ul className="ml-4 mt-4 flex flex-col gap-4">
+        <ul className="ml-4 mt-4 mb-20 flex flex-col gap-4">
           <li className="flex gap-2 items-center">
             <FaUser className='text-sm'/>
             <NavLink
@@ -44,19 +44,10 @@ const AdminDashboard = () => {
             </NavLink>
           </li>
           <li className="flex gap-2 items-center">
-            <FaShoppingBag className='text-md'/>
-            <NavLink
-              to={'add-product'}
-              style={({ isActive }) => (isActive ? style : null)}
-            >
-              Add Product
-            </NavLink>
-          </li>
-          <li className="flex gap-2 items-center">
             <IoLogOut className='text-lg'/>
             <NavLink to={'/'}>LogOut</NavLink>
           </li>
-        </ul>
+        </ul >
       </div>
       <div>
         <Outlet />

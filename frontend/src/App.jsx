@@ -17,7 +17,6 @@ import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPassword from './pages/ResetPassword';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminProfile from './pages/admin/AdminProfile';
-import AddProduct from './pages/admin/AddProduct';
 import ShowUsers  from './pages/admin/ShowUsers';
 import UpdateAdminProfile from './pages/admin/UpdateAdminProfile';
 import UpdateProduct from './pages/admin/UpdateProduct';
@@ -57,7 +56,6 @@ const App = () => {
             <Route path='admin' element={<AdminDashboard/>}>
                 <Route index element={<AdminProfile/>} />
                 <Route path='update-admin-profile' element={<UpdateAdminProfile/>} />
-                <Route path='add-product' element={<AddProduct/>}/>
                 <Route path='update-product' element={<UpdateProduct/>}/>
                 <Route path='show-products' element={<ShowProducts/>}/>
                 <Route path='show-users' element={<ShowUsers/>}/>
