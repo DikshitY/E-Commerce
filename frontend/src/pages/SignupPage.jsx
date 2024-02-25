@@ -49,7 +49,7 @@ const SignupPage = () => {
 
   return (
     <div className="pt-20 pb-28 flex items-center justify-center h-screen">
-      <div className="px-8 py-12 shadow-2xl rounded-xl">
+      <div className="px-8 py-12 shadow-2xl rounded-xl bg-white">
         <h1 className="text-2xl font-semibold mb-12">Create your account</h1>
         <form onSubmit={handleSubmit}>
           <div>

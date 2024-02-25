@@ -56,10 +56,10 @@ const UpdateProductForm = ({ setIsOpen, getAllProducts, product }) => {
   };
 
   return (
-    <div className="hide-scrollbar overflow-y-auto scrollba border-2 rounded-xl shadow-2xl">
+    <div className="w-full hide-scrollbar overflow-y-auto border-2 rounded-xl shadow-2xl max-sm:w-[300px]">
       <form
         onSubmit={handleSubmit}
-        className="w-[300px] grid grid-cols-1 border-2 rounded-xl p-4 shadow-2xl"
+        className="w-full grid grid-cols-1 border-2 rounded-xl p-4 shadow-2xl"
       >
         <h1 className="text-[20px] font-bold mb-4">Update Product</h1>
         <label className="mb-3">
@@ -70,6 +70,7 @@ const UpdateProductForm = ({ setIsOpen, getAllProducts, product }) => {
             className="border-2 w-full rounded-md py-1 px-2"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            required
           />
         </label>
         <label className="mb-3">
@@ -80,6 +81,7 @@ const UpdateProductForm = ({ setIsOpen, getAllProducts, product }) => {
             placeholder="enter product category"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
+            required
           />
         </label>
         <label className="mb-3">
@@ -90,6 +92,7 @@ const UpdateProductForm = ({ setIsOpen, getAllProducts, product }) => {
             placeholder="enter product brand"
             value={brand}
             onChange={(e) => setBrand(e.target.value)}
+            required
           />
         </label>
         <label className="mb-3">
@@ -100,6 +103,7 @@ const UpdateProductForm = ({ setIsOpen, getAllProducts, product }) => {
             placeholder="enter product price"
             value={price || ''}
             onChange={handlePriceChange}
+            required
           />
         </label>
         <label className="mb-2">
@@ -111,6 +115,7 @@ const UpdateProductForm = ({ setIsOpen, getAllProducts, product }) => {
             placeholder="enter product description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            required
           ></textarea>
         </label>
         <label className="mb-3">
@@ -121,6 +126,7 @@ const UpdateProductForm = ({ setIsOpen, getAllProducts, product }) => {
             placeholder="enter product quantity"
             value={quantity || ''}
             onChange={handleQuantityChange}
+            required
           />
         </label>
         <label className="mb-6">

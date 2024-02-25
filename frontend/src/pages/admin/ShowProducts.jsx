@@ -49,6 +49,10 @@ const ShowProducts = () => {
 
   const config = [
     {
+      label: 'S.No.',
+      render: (product) => ".",
+    },
+    {
       label: 'Products',
       render: (product) => product.name,
       sortValue: (product) => product.name,
@@ -58,7 +62,7 @@ const ShowProducts = () => {
       render: (product) => (
         <img
           src={product.imageUrl}
-          className="h-16 w-16 rounded-2xl object-cover"
+          className="h-16 min-w-16 rounded object-scale-down"
         />
       ),
     },
@@ -114,7 +118,7 @@ const ShowProducts = () => {
   }, []);
 
   return (
-    <div>
+    <div className='max-w-screen'>
       <button
         onClick={handleClick}
         className="bg-black text-white px-4 py-2 rounded-2xl mb-8"
@@ -128,7 +132,7 @@ const ShowProducts = () => {
           <SortableTable data={products} config={config} />
         </div>
       ) : (
-        <h1>No products to show.</h1>
+        <h1>Loading...</h1>
       )}
     </div>
   );

@@ -10,23 +10,25 @@ const PrivateComponent = () => {
 
   useEffect(() => {
     const handleNavigation = () => {
-      if ( user.role) {
-       return navigate('/dashboard/admin');
-      } else {
-       return navigate('/dashboard/user');
+      if (user.role) {
+       navigate('/dashboard/admin');
+       toast.error("You are not a User!")
       }
     };
+
     const initialCheck = () => {
       toast.error('Please Login.');
       navigate('/login', {
         state: location.pathname,
       });
     };
+
     if (!token) {
       return initialCheck();
     }
+
     return handleNavigation()
-  }, []);
+  }, [token]);
 
   return token ? <Outlet /> : null;
 };

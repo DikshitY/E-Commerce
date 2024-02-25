@@ -17,7 +17,7 @@ const productSchema = new mongoose.Schema(
     },
     rating: {
       type: Number,
-      default: Number((Math.random() * 4 + 1).toFixed(1)),
+      default: Number(Math.floor(Math.random() * 4 + 1)),
     },
     reviews: {
       type: Number,

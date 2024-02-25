@@ -35,15 +35,27 @@ exports.addProduct = async (req, res) => {
 };
 
 exports.getProducts = async (req, res) => {
-  try {
-    const products = await Product.find().sort({ createdAt: -1 }).lean();
+  const match = {};
 
-    if (!products || products.length === 0) {
-      return res.status(400).json({
-        status: 'fail',
-        message: 'No products found.',
-      });
-    }
+  if (req.query.category) {
+    match.category = req.query.category;
+  }
+
+  // const limit = parseInt(req.query.limit);
+  // const skip = parseInt(req.query.skip);
+  const sort = { createdAt: -1 };
+
+  if (req.query.sortBy) {
+    const parts = req.query.sortBy.split(':');
+    sort[parts[0]] = parts[1] === 'desc' ? -1 : 1;
+  }
+
+  try {
+    const products = await Product.find(match)
+      // .limit(limit)
+      // .skip(skip)
+      .sort(sort)
+      .lean();
 
     res.json({
       status: 'success',

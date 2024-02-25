@@ -54,10 +54,10 @@ const Form = ({setIsOpen, getAllProducts}) => {
   };
 
   return (
-    <div className="hide-scrollbar overflow-y-auto scrollba border-2 rounded-xl shadow-2xl">
+    <div className="w-full hide-scrollbar overflow-y-auto scrollba border-2 rounded-xl shadow-2xl max-sm:w-[300px]">
       <form
         onSubmit={handleSubmit}
-        className="w-[300px] grid grid-cols-1 border-2 rounded-xl p-4 shadow-2xl"
+        className="w-full grid grid-cols-1 border-2 rounded-xl p-4 shadow-2xl"
       >
         <h1 className="text-[20px] font-bold mb-4">Add New Product</h1>
         <label className="mb-3">

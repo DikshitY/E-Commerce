@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const auth = require('../middlewares/auth')
-const isAdmin = require('../middlewares/isAdmin')
 const {createUser,loginUser, test, forgetpassword, resetpassword, logoutUser, getUser} = require('../controllers/userControllers')
 
 

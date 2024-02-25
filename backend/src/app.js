@@ -5,6 +5,9 @@ const app = express();
 const AppError = require('./utils/AppError');
 const userRouter = require('./routes/user.routes')
 const productRouter = require('./routes/product.routes')
+const cartRouter = require('./routes/cart.routes')
+// const stripeRouter = require('./routes/stripe.routes')
+const razorpayRouter = require('./routes/razorpay.routes')
 const fileUpload = require('express-fileupload')
 
 app.use(cors());
@@ -21,6 +24,9 @@ app.get('/', (req,res) => {
 
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/products', productRouter)
+app.use('/api/v1/cart', cartRouter)
+// app.use('/api/v1/stripe', stripeRouter)
+app.use('/api/v1/razorpay', razorpayRouter)
 
 
 app.all('*', (req, res, next) => {

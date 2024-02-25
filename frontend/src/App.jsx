@@ -17,13 +17,12 @@ import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPassword from './pages/ResetPassword';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminProfile from './pages/admin/AdminProfile';
-import ShowUsers  from './pages/admin/ShowUsers';
-import UpdateAdminProfile from './pages/admin/UpdateAdminProfile';
-import UpdateProduct from './pages/admin/UpdateProduct';
 import ShowProducts from './pages/admin/ShowProducts';
 import UserProfile from './pages/user/UserProfile';
-import UpdateUserProfile from './pages/user/UpdateUserProfile';
-import Orders from './pages/user/Orders'
+import AdminComponent from './components/private/adminComponent';
+import Products from './pages/Products';
+import ProductDetailShow from './components/ProductDetailShow';
+import CartPage from './pages/CartPage';
 
 const App = () => {
   const disptach = useDispatch();
@@ -47,22 +46,22 @@ const App = () => {
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<HomePage />} />
+          <Route path="products" element={<Products />} />
+          <Route path="products/:id" element={<ProductDetailShow />} />
           <Route path="dashboard" element={<PrivateComponent />}>
-            <Route path='user' element={<Dashboard />}>
-              <Route index element={<UserProfile/>}/>
-              <Route path='update-user-profile' element={<UpdateUserProfile/>}/>
-              <Route path='orders' element={<Orders/>}/>
+            <Route path="user" element={<Dashboard />}>
+              <Route index element={<UserProfile />} />
             </Route>
-            <Route path='admin' element={<AdminDashboard/>}>
-                <Route index element={<AdminProfile/>} />
-                <Route path='update-admin-profile' element={<UpdateAdminProfile/>} />
-                <Route path='update-product' element={<UpdateProduct/>}/>
-                <Route path='show-products' element={<ShowProducts/>}/>
-                <Route path='show-users' element={<ShowUsers/>}/>
+          </Route>
+          <Route path="dashboard" element={<AdminComponent />}>
+            <Route path="admin" element={<AdminDashboard />}>
+              <Route index element={<AdminProfile />} />
+              <Route path="show-products" element={<ShowProducts />} />
             </Route>
           </Route>
           <Route path="signup" element={<SignupPage />} />
           <Route path="login" element={<LoginPage />} />
+          <Route path="cart" element={<CartPage />} />
           <Route path="forgotpassword" element={<ForgotPasswordPage />} />
           <Route path="resetpassword/:id/:token" element={<ResetPassword />} />
           <Route path="about" element={<AboutPage />} />

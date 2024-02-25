@@ -14,7 +14,7 @@ const SortableTable = (props) => {
       ...column,
       header: () => (
         <th
-          className="cursor-pointer hover:bg-gray-100"
+          className="cursor-pointer p-2 hover:bg-gray-100"
           onClick={() => handleClick(column.label)}
         >
           <div className="flex items-center">
@@ -53,7 +53,7 @@ function setIcons(label, sortBy, sortOrder) {
     );
   } else if (sortOrder === null) {
     return (
-      <div>
+      <div >
         <GoChevronUp />
         <GoChevronDown />
       </div>
