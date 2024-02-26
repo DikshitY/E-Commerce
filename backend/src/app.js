@@ -6,9 +6,9 @@ const AppError = require('./utils/AppError');
 const userRouter = require('./routes/user.routes')
 const productRouter = require('./routes/product.routes')
 const cartRouter = require('./routes/cart.routes')
-// const stripeRouter = require('./routes/stripe.routes')
 const razorpayRouter = require('./routes/razorpay.routes')
 const fileUpload = require('express-fileupload')
+const path = require('path')
 
 app.use(cors());
 app.use(helmet());
@@ -17,15 +17,15 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(fileUpload({
   useTempFiles: true
 }))
+app.use(express.static(path.join(__dirname, '../../frontend/dist')))
 
-app.get('/', (req,res) => {
-  res.send('Welcome to the E-Commerece API.')
+app.use('*', function(){
+  res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'))
 })
 
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/products', productRouter)
 app.use('/api/v1/cart', cartRouter)
-// app.use('/api/v1/stripe', stripeRouter)
 app.use('/api/v1/razorpay', razorpayRouter)
 
 
