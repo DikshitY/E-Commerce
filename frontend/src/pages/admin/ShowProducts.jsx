@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Modal from '../../components/reusable/modal';
+import Modal from '../../components/reusable/Modal';
 import Form from '../../components/AddProductForm';
 import UpdateProductForm from '../../components/UpdateProductForm';
 import axios from 'axios';
