@@ -1,5 +1,5 @@
 import { GoChevronUp, GoChevronDown } from "react-icons/go";
-import Table from "./table";
+import Table from "./Table";
 import useSort from "../../hooks/useSort";
 
 const SortableTable = (props) => {
