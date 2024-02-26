@@ -15,7 +15,7 @@ import PrivateComponent from './components/private/PrivateComponent';
 import Dashboard from './pages/user/Dashboard';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ResetPassword from './pages/ResetPassword';
-import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminDashboard from './pages/admin/adminDashboard';
 import AdminProfile from './pages/admin/AdminProfile';
 import ShowProducts from './pages/admin/ShowProducts';
 import UserProfile from './pages/user/UserProfile';
