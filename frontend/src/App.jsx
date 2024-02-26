@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
-import axios from 'axios';
+import axios from './Axios';
 import { useDispatch } from 'react-redux';
 import { setToken, setUser } from './store';
 import Layout from './components/Layout/Layout';

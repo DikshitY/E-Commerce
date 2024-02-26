@@ -2,7 +2,7 @@ import React from 'react';
 import { FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import axios from 'axios';
+import axios from '../../Axios';
 import { useNavigate } from 'react-router-dom';
 
 const Dropdown = ({ data }) => {

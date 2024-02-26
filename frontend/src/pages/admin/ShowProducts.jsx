@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Modal from '../../components/reusable/ReusableModal';
 import Form from '../../components/AddProductForm';
 import UpdateProductForm from '../../components/UpdateProductForm';
-import axios from 'axios';
+import axios from '../../Axios';
 import toast from 'react-hot-toast';
 import SortableTable from '../../components/reusable/SortableTable';
 

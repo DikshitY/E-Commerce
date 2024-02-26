@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
+import axios from '../Axios';
 import toast from 'react-hot-toast';
 import { setProducts, setDummy } from '../store';
 import ProductShow from '../components/ProductShow';

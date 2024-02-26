@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from '../Axios';
 import toast from 'react-hot-toast';
 
 const UpdateProductForm = ({ setIsOpen, getAllProducts, product }) => {

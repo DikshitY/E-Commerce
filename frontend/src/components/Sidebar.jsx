@@ -5,7 +5,7 @@ import { FaCartShopping } from 'react-icons/fa6';
 import { IoMenu } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import axios from 'axios';
+import axios from '../Axios';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setUser, setToken, useFetchCartQuery } from '../store';
