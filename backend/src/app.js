@@ -8,7 +8,6 @@ const productRouter = require('./routes/product.routes')
 const cartRouter = require('./routes/cart.routes')
 const razorpayRouter = require('./routes/razorpay.routes')
 const fileUpload = require('express-fileupload')
-const path = require('path')
 
 app.use(cors());
 app.use(helmet());
@@ -17,11 +16,6 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(fileUpload({
   useTempFiles: true
 }))
-app.use(express.static(path.join(__dirname, '../../frontend/dist')))
-
-app.use('*', function(){
-  res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'))
-})
 
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/products', productRouter)
