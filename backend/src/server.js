@@ -9,7 +9,7 @@ const URL = process.env.DATABASE_URL.replace(
 );
 mongoose
   .connect(URL)
-  .then((con) => console.log('Connected to mongoDB database', con.connection.host))
+.then((con) =>  console.log('Connected to mongoDB database', con.connection.host))
   .catch((err) => console.log('Unable to connect to the database,', err));
 
 app.listen(Port, () => {

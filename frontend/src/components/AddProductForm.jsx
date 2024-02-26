@@ -29,7 +29,7 @@ const Form = ({setIsOpen, getAllProducts}) => {
       const headers = { Authorization: `Bearer ${token}` };
 
       const { data } = await axios.post(
-        'http://localhost:5000/api/v1/products',
+        '/api/v1/products',
         formData,
         { headers }
       );

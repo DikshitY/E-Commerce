@@ -29,8 +29,8 @@ const Products = () => {
     try {
       const { data } = await axios.get(
         category
-          ? `http://localhost:5000/api/v1/products?category=${category}`
-          : 'http://localhost:5000/api/v1/products'
+          ? `/api/v1/products?category=${category}`
+          : '/api/v1/products'
       );
       dispatch(setProducts(data.products));
       dispatch(setDummy(data.products));

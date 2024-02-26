@@ -116,7 +116,6 @@ exports.deleteCartItem = async (req, res) => {
 };
 
 exports.removeItems = async (req,res) => {
-  console.log(req.user._id)
 
   try {
     const items = await Cart.deleteMany({userID : req.user._id});

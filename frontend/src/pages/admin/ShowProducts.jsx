@@ -14,7 +14,7 @@ const ShowProducts = () => {
 
   const getAllProducts = async () => {
     try {
-      const { data } = await axios.get('http://localhost:5000/api/v1/products');
+      const { data } = await axios.get('/api/v1/products');
       if (data) {
         setProducts(data.products);
       }
@@ -34,7 +34,7 @@ const ShowProducts = () => {
       const token = JSON.parse(localStorage.getItem('token'));
       const headers = { Authorization: `Bearer ${token}` };
       const { data } = await axios.delete(
-        `http://localhost:5000/api/v1/products/${id}`,
+        `/api/v1/products/${id}`,
         { headers }
       );
       if (data) {

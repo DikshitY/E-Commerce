@@ -15,7 +15,7 @@ const ResetPassword = () => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
       const res = await axios.patch(
-        `http://localhost:5000/api/v1/users/resetpassword`,
+        `/api/v1/users/resetpassword`,
         {
           password,
         },
@@ -24,7 +24,6 @@ const ResetPassword = () => {
       if (res) {
         toast.success('Password updated.');
         navigate('/login');
-        console.log('asda');
       }
     } catch (err) {
         console.log(err);

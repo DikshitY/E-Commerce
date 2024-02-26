@@ -22,7 +22,7 @@ const Sidebar = () => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
       const res = await axios.post(
-        'http://localhost:5000/api/v1/users/logout',
+        '/api/v1/users/logout',
         {},
         { headers }
       );

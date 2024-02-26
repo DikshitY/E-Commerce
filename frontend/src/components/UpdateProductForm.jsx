@@ -31,7 +31,7 @@ const UpdateProductForm = ({ setIsOpen, getAllProducts, product }) => {
       const headers = { Authorization: `Bearer ${token}` };
 
       const { data } = await axios.patch(
-        `http://localhost:5000/api/v1/products/${product._id}`,
+        `/api/v1/products/${product._id}`,
         formData,
         { headers }
       );

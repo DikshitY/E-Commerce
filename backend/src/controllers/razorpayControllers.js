@@ -1,34 +1,6 @@
-// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const Razorpay = require('razorpay');
 const crypto = require('crypto')
 
-// exports.paymentGateway = async (req, res) => {
-//   const { products, total, user } = req.body;
-
-//   const lineItems = products.map((product) => ({
-//     price_data: {
-//       currency: 'INR',
-//       product_data: {
-//         name: product.itemID.name,
-//         images: [product.itemID.imageUrl]
-//       },
-//       unit_amount: product.itemID.price * 100,
-//     },
-//     quantity: product.quantity,
-//   }));
-
-//   const session = await stripe.checkout.sessions.create({
-//     payment_method_types: ['card'],
-//     line_items: lineItems,
-//     mode: 'payment',
-//     success_url: 'http://localhost:5173/products',
-//     cancel_url: 'http://localhost:5173/cart',
-//     customer_email: user?.email,
-//     billing_address_collection: 'required',
-//   });
-
-//   res.json({ id: session.id });
-// };
 exports.paymentGateway = async (req, res) => {
   try {
     const razorpay = new Razorpay({

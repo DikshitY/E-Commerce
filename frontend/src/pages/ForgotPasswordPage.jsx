@@ -10,7 +10,7 @@ const ForgotPasswordPage = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/v1/users/forgetpassword`,
+        `/api/v1/users/forgetpassword`,
         {
           email,
         }

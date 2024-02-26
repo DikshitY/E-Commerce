@@ -32,7 +32,7 @@ const App = () => {
     if (token) {
       const headers = { Authorization: `Bearer ${token}` };
       axios
-        .get('http://localhost:5000/api/v1/users/me', { headers })
+        .get('/api/v1/users/me', { headers })
         .then((res) => res.data)
         .then((data) => disptach(setUser(data)))
         .catch((err) => console.log(err));

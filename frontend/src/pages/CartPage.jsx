@@ -86,14 +86,13 @@ const CartPage = () => {
       // receiptId: 'asdfgh'
     };
 
-    const response = await fetch('http://localhost:5000/api/v1/razorpay', {
+    const response = await fetch('/api/v1/razorpay', {
       method: 'POST',
       headers: headers,
       body: JSON.stringify(body),
     });
 
     const order = await response.json();
-    console.log(order);
 
     var options = {
       key: 'rzp_test_BEpoRjzQAEhiq7',
@@ -108,7 +107,7 @@ const CartPage = () => {
           ...response,
         };
         const validateResponse = await fetch(
-          'http://localhost:5000/api/v1/razorpay/validate',
+          '/api/v1/razorpay/validate',
           {
             method: 'POST',
             body: JSON.stringify(body),
@@ -128,7 +127,7 @@ const CartPage = () => {
         toast.success('Order placed successfully.');
 
         const deleteCart = await fetch(
-          'http://localhost:5000/api/v1/cart',
+          '/api/v1/cart',
           {
             method: 'DELETE',
             headers: {
@@ -139,9 +138,7 @@ const CartPage = () => {
 
         const deleteCartData = await deleteCart.json();
         window.location.reload();
-        console.log(deleteCartData);
 
-        console.log(data);
       },
       prefill: {
         name: user.name,

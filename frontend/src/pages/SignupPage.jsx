@@ -24,7 +24,7 @@ const SignupPage = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/v1/users/signup`,
+        `/api/v1/users/signup`,
         {
           name,
           email,
@@ -43,7 +43,7 @@ const SignupPage = () => {
         toast.error('Unable to sign up.');
       }
     } catch (err) {
-      toast.error('Something went wrong. Please try again.');
+      toast.error('Password must have 7 letters or email already exists.');
     }
   };
 
