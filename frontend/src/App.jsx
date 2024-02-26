@@ -19,7 +19,7 @@ import AdminDashboard from './pages/admin/adminDashboard';
 import AdminProfile from './pages/admin/AdminProfile';
 import ShowProducts from './pages/admin/ShowProducts';
 import UserProfile from './pages/user/UserProfile';
-import AdminComponent from './components/private/adminComponent';
+import AdminComponent from './components/private/AdminComponent';
 import Products from './pages/Products';
 import ProductDetailShow from './components/ProductDetailShow';
 import CartPage from './pages/CartPage';
