@@ -17,6 +17,10 @@ app.use(fileUpload({
   useTempFiles: true
 }))
 
+app.get('/', (req,res) => {
+  res.json("Welcome to the E-Commerce API.")
+})
+
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/products', productRouter)
 app.use('/api/v1/cart', cartRouter)
